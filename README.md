@@ -28,7 +28,7 @@ grep -a "flag" /proc/<pid>/root/sda
 
 PoC:
 
-![](https://i.imgur.com/k1kJVE2.png)
+![](https://i.imgur.com/7FyR5qG.png)
 
 ## Automation
 
