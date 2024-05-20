@@ -1,4 +1,4 @@
-# Abusing mount namespaces through /proc/<PID>/root
+# Abusing mount namespaces through /proc/*PID*/root
 
 In this repository I come to automate the namespace technique to escape from a Docker and elevate privileges/remove the flag/dump data, etcetera. You can read in more detail this technique [here](https://labs.withsecure.com/publications/abusing-the-access-to-mount-namespaces-through-procpidroot). In order to perform this technique successfully you need to fulfill the following requirements.
 
