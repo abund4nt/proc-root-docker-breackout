@@ -19,7 +19,7 @@ su luk4s
 
 With this we are ready to work on the container.
 
-**The following commands must be executed from the hosts machine.
+**The following commands must be executed from the hosts machine.**
 
 ``` shell
 ps aux | grep sh # You will notice a process that runs your user with a sh, this was the process you created in the container
