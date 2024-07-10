@@ -37,5 +37,3 @@ Program a C script which automates the steps to follow in the container, if you 
 ``` shell
 gcc exploit.c -o exploit
 ```
-
-Thanks for reading :)
